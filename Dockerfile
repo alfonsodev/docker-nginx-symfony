@@ -1,6 +1,6 @@
 FROM ubuntu
-RUN apt-get update
-RUN apt-get -y install git nginx nginx-extras php5-dev php5-fpm libpcre3-dev gcc make php5-mysql php5-curl php5-apc
+RUN apt-get update --fix-missing
+RUN apt-get -y install git nginx nginx-extras php5-dev php5-fpm libpcre3-dev gcc make php5-mysql php5-curl php-apc
 RUN mkdir /var/www
 RUN echo "<?php phpinfo(); ?>" > /var/www/index.php
 
@@ -10,6 +10,9 @@ RUN cd mongo-php-driver && phpize
 RUN cd mongo-php-driver && ./configure
 RUN cd mongo-php-driver && make
 RUN cd mongo-php-driver && make install
+
+RUN curl -sS https://getcomposer.org/installer | php
+RUN mv composer.phar /usr/local/bin/composer
 
 RUN echo 'extension=mongo.so' > /etc/php5/cli/conf.d/50-mongo.ini
 RUN echo 'extension=mongo.so' > /etc/php5/fpm/conf.d/50-mongo.ini
@@ -24,3 +27,4 @@ ADD server.key /etc/nginx/ssl/
 EXPOSE 80
 
 CMD service php5-fpm start && nginx
+

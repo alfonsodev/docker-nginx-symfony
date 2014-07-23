@@ -16,7 +16,7 @@ server {
         deny all;
     }
 
-    location ~ ^/(app|app_dev|config)\.php(/|$) {
+    location ~ ^/(asset|app|app_dev|config)\.php(/|$) {
         fastcgi_pass unix:/var/run/php5-fpm.sock;
         fastcgi_split_path_info       ^(.+\.php)(/.+)$;
         include fastcgi_params;
