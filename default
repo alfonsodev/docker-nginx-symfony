@@ -25,5 +25,9 @@ server {
         fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
         fastcgi_param DATASTORE_PORT_27017_TCP_ADDR $datastore_port_27017_tcp_addr;
         fastcgi_param DATASTORE_PORT_27017_TCP_PORT $datastore_port_27017_tcp_port;
+
+        fastcgi_param MYSQL_PORT_3306_TCP_ADDR $mysql_port_3306_tcp_addr;
+        fastcgi_param MYSQL_ENV_MYSQL_PASS $mysql_env_mysql_pass;
+        fastcgi_param MYSQL_ENV_MYSQL_USER $mysql_env_mysql_user;
     }
 }
