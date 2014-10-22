@@ -1,5 +1,7 @@
 FROM ubuntu
 RUN apt-get update --fix-missing
+RUN apt-get install -y openjdk-7-jre
+RUN apt-get install -y ghostscript
 RUN apt-get -y install git nginx nginx-extras php5-dev php5-fpm libpcre3-dev gcc make php5-mysql php5-curl php-apc
 RUN mkdir /var/www
 RUN echo "<?php phpinfo(); ?>" > /var/www/index.php
@@ -23,6 +25,8 @@ ADD default-ssl /etc/nginx/sites-enabled/default-ssl
 
 ADD server.crt /etc/nginx/ssl/
 ADD server.key /etc/nginx/ssl/
+
+VOLUME ["/var/log/nginx"]
 
 EXPOSE 80
 
